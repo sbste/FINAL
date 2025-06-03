@@ -1,0 +1,107 @@
+# Sistema di Gestione Stazioni di Ricarica per Veicoli Elettrici
+
+Questo documento spiega il funzionamento del codice dell'applicazione.
+
+## Struttura del Progetto
+
+L'applicazione è organizzata nelle seguenti cartelle principali:
+
+- /admin: Contiene tutte le pagine dell'interfaccia amministrativa
+- /assets: File statici (CSS, JavaScript, immagini)
+- /config: File di configurazione e connessione al database
+- /includes: Funzioni riutilizzabili e componenti PHP
+- /pages: Pagine principali dell'applicazione
+- /supabase: Schema del database e migrazioni
+
+## Componenti Principali
+
+### 1. Sistema di Autenticazione
+- Gestito da auth-functions.php
+- Supporta registrazione, login e gestione profilo
+- Utilizza password_hash() per la sicurezza delle password
+- Mantiene le sessioni utente con PHP sessions
+
+### 2. Gestione Database
+- Utilizza PDO per connessioni sicure al database
+- Funzioni helper in database.php per query comuni
+- Prepared statements per prevenire SQL injection
+- Schema del database in supabase/migrations/schema.sql
+
+### 3. Prenotazioni
+- Sistema completo in booking-functions.php
+- Verifica disponibilità in tempo reale
+- Gestione conflitti di prenotazione
+- Notifiche automatiche per scadenze
+
+### 4. Stazioni di Ricarica
+- CRUD completo per gestione stazioni
+- Monitoraggio stato in tempo reale
+- Geolocalizzazione con Google Maps
+- Dashboard per statistiche di utilizzo
+
+### 5. Interfaccia Amministrativa
+- Pannello admin completo
+- Gestione utenti e prenotazioni
+- Monitoraggio malfunzionamenti
+- Report e statistiche dettagliate
+
+### 6. Frontend
+- Design responsive con CSS personalizzato
+- JavaScript per interazioni dinamiche
+- Validazione form lato client e server
+- Notifiche real-time per gli utenti
+
+## Flusso dell'Applicazione
+
+1. L'utente accede al sistema (login.php o register.php)
+2. Può visualizzare le stazioni disponibili (stations.php)
+3. Effettua una prenotazione (bookings.php)
+4. Monitora le sue prenotazioni (dashboard.php)
+5. Gestisce il suo profilo (profile.php)
+
+Gli amministratori hanno accesso a funzionalità aggiuntive attraverso /admin/*.php
+
+## Sicurezza
+
+- Protezione CSRF con token
+- Password hashate con password_hash()
+- Prepared statements per query SQL
+- Validazione input server-side
+- Sanitizzazione output con htmlspecialchars()
+- Gestione sessioni sicura
+
+## Database
+
+Il database include le seguenti tabelle principali:
+
+1. Users: Gestione utenti
+2. Stations: Stazioni di ricarica
+3. Charging_Points: Punti di ricarica
+4. Bookings: Prenotazioni
+5. Chargings: Sessioni di ricarica
+6. Admins: Amministratori
+7. Reports: Segnalazioni
+8. Malfunctions: Malfunzionamenti
+
+## Funzioni Helper
+
+- functions.php: Utility generali
+- auth-functions.php: Autenticazione
+- booking-functions.php: Prenotazioni
+- station-functions.php: Gestione stazioni
+
+## Assets
+
+- main.css: Stili principali
+- main.js: JavaScript comune
+- bookings.js: Logica prenotazioni
+- dashboard.js: Funzionalità dashboard
+
+## Note Tecniche
+
+- PHP 7.4+ richiesto
+- MySQL/MariaDB per database
+- Apache/Nginx web server
+- Supporto per sessioni PHP
+- PDO per database
+- JavaScript ES6+
